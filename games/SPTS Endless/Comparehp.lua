@@ -10,9 +10,9 @@ for _, player in ipairs(Players:GetPlayers()) do
 			local MaxHP = humanoid.MaxHP.value
 			local Message = player.Name .. "'s Max HP: " .. MaxHP
 			if MaxHP > MyMaxHP then
-				Message = Message .. "💪" -- // Stronger than you
+				Message = Message .. "Stronger"
 			elseif MaxHP < MyMaxHP then
-				Message = Message .. "🚫💪" -- // Weaker than you
+				Message = Message .. "Weaker"
 			end
 			print(Message)
 		end
