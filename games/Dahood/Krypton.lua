@@ -97,8 +97,7 @@ pcall(function()
 			if not updating then
 				updating = true
 				spoofer = math.random(800, 900) .. "." .. math.random(10, 99) .. "MB"
-				game:GetService("CoreGui").RobloxGui.PerformanceStats["1"].StatsMiniTextPanelClass.ValueLabel.Text =
-					spoofer
+				game:GetService("CoreGui").RobloxGui.PerformanceStats["1"].StatsMiniTextPanelClass.ValueLabel.Text = spoofer
 				updating = false
 			end
 		end)
