@@ -231,6 +231,7 @@ game.RunService.Heartbeat:Connect(function()
 	end
 end)
 
+-- // the only thing is skidded nothing else is 🤡
 local __index
 __index = hookmetamethod(game, "__index", function(t, k)
 	if t:IsA("Mouse") and k == "Hit" or k == "Target" then
