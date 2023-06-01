@@ -1,20 +1,20 @@
-local Players = game:GetService("Players")
-local MyPlayer = Players.LocalPlayer
-local MyMaxHP = MyPlayer.Character:WaitForChild("Humanoid").MaxHP.value
+local players = game:getservice("players")
+local myplayer = players.localplayer
+local myMaxHP = myplayer.character:WaitForChild("humanoid").maxhp.value
 
-for _, player in ipairs(Players:GetPlayers()) do
-	local character = player.Character
+for _, player in ipairs(players:getplayers()) do
+	local character = player.character
 	if character then
-		local humanoid = character:FindFirstChild("Humanoid")
+		local humanoid = character:findfirstchild("humanoid")
 		if humanoid then
-			local MaxHP = humanoid.MaxHP.value
-			local Message = player.Name .. "'s Max HP: " .. MaxHP
-			if MaxHP > MyMaxHP then
-				Message = Message .. "Stronger"
-			elseif MaxHP < MyMaxHP then
-				Message = Message .. "Weaker"
+			local maxhp = humanoid.maxhp.value
+			local message = player.name .. "'s max hp: " .. maxhp
+			if maxhp > maxhp then
+				message = message .. "Stronger"
+			elseif maxhp < maxhp then
+				message = message .. "Weaker"
 			end
-			print(Message)
+			print(message)
 		end
 	end
 end
