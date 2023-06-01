@@ -2,53 +2,53 @@
 
 repeat
     wait()
-until game:IsLoaded()
-local TeleportService = game:GetService("TeleportService")
-local HttpService = game:GetService("HttpService")
+until game:isloaded()
+local teleportservice = game:getservice("teleportservice")
+local httpservice = game:getservice("httpservice")
 
-local eggsFolder = game:GetService('Workspace').Ignored
-local eggCount = 0
+local eggsfolder = game:getservice('workspace').ignored
+local eggcount = 0
 
-local function findNewServer()
+local function findnewserver()
     local servers = {}
-    local nextPageCursor
+    local nextpagecursor
     while true do
-        local url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Asc&limit=100%s", game.PlaceId, nextPageCursor and "&cursor=" .. nextPageCursor or "")
-        local response = HttpService:JSONDecode(game:HttpGet(url))
+        local url = string.format("https://games.roblox.com/v1/games/%d/servers/public?sortorder=asc&limit=100%s", game.placeid, nextpagecursor and "&cursor=" .. nextpagecursor or "")
+        local response = httpservice:jsondecode(game:httpget(url))
         for _, server in ipairs(response.data) do
-            if server.id ~= game.JobId and server.playing < server.maxPlayers then
+            if server.id ~= game.jobid and server.playing < server.maxplayers then
                 return server.id
             end
             table.insert(servers, server)
         end
-        nextPageCursor = response.nextPageCursor
-        if not nextPageCursor then
+        nextpagecursor = response.nextpagecursor
+        if not nextpagecursor then
             break
         end
     end
     return nil
 end
 
-local function serverHopper()
-    local serverId = findNewServer()
-    if serverId then
-        TeleportService:TeleportToPlaceInstance(game.PlaceId, serverId)
+local function serverhopper()
+    local serverid = findnewserver()
+    if serverid then
+        teleportservice:teleporttoplaceinstance(game.placeid, serverid)
     end
 end
 
 while true do
-    for _, egg in pairs(eggsFolder:GetChildren()) do
-        if egg:IsA('MeshPart') and egg.Name:find('Egg') then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = egg.CFrame
+    for _, egg in pairs(eggsfolder:getchildren()) do
+        if egg:isa('meshpart') and egg.name:find('egg') then
+            game.players.localplayer.character.humanoidrootpart.cframe = egg.cframe
             wait(1)
-            eggCount += 1
-            rconsolewarn("Picked up an egg!")
+            eggcount = eggcount + 1
+            rconsolewarn("picked up an egg!")
         end
     end
-    if eggCount == 0 then
-        rconsolewarn('No more eggs!')
-        serverHopper()
+    if eggcount == 0 then
+        rconsolewarn('no more eggs!')
+        serverhopper()
     end
-    eggCount = 0
+    eggcount = 0
     wait(1)
 end
